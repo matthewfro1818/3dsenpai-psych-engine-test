@@ -455,11 +455,6 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 			case 'school':
-				cam3D = new Flx3DView(0, 0, 1600, 900); // make sure to keep width and height as 1600 and 900
-				cam3D.scrollFactor.set();
-				cam3D.screenCenter();
-				cam3D.antialiasing = true;
-				add(cam3D);
 			view = new ModelView(1, 0, 1, 1, 6000);
 
 			view.view.visible = false;
@@ -503,11 +498,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 		case 'tvStage':
-				cam3D = new Flx3DView(0, 0, 1600, 900); // make sure to keep width and height as 1600 and 900
-				cam3D.scrollFactor.set();
-				cam3D.screenCenter();
-				cam3D.antialiasing = true;
-				add(cam3D);
 			view = new ModelView(1, 1, 1, 1, 6000);
 
 			view.view.visible = false;
