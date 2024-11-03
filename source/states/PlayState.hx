@@ -65,6 +65,24 @@ import psychlua.HScript;
 // 3d shit
 /*import flx3d.Flx3DView;
 import flx3d.Flx3DUtil;
+import away3d.textures.BitmapCubeTexture;
+import away3d.textures.BitmapTexture;
+import away3d.primitives.SkyBox;
+import away3d.materials.MaterialBase;
+import openfl.geom.Vector3D;
+import away3d.animators.data.ParticleProperties;
+import away3d.animators.data.ParticlePropertiesMode;
+import away3d.animators.data.ParticlePropertiesMode;
+import away3d.animators.data.ParticlePropertiesMode;
+import away3d.animators.data.ParticlePropertiesMode;
+import away3d.materials.ColorMaterial;
+import away3d.tools.helpers.ParticleGeometryHelper;
+import away3d.animators.ParticleAnimator;
+import away3d.animators.nodes.ParticleRotationalVelocityNode;
+import away3d.animators.nodes.ParticleRotateToPositionNode;
+import away3d.animators.nodes.ParticleVelocityNode;
+import away3d.animators.nodes.ParticlePositionNode;
+import away3d.animators.ParticleAnimationSet;
 import away3d.lights.DirectionalLight;
 import away3d.materials.lightpickers.StaticLightPicker;
 import away3d.materials.methods.OutlineMethod;
@@ -73,7 +91,12 @@ import away3d.events.AnimationStateEvent;
 import away3d.core.base.Geometry;
 import away3d.entities.Mesh;
 import away3d.materials.TextureMaterial;
-import away3d.utils.Cast;*/
+import away3d.utils.Cast;
+import away3d.library.assets.Asset3DType;
+import openfl.net.URLRequest;
+import away3d.events.Asset3DEvent;
+import away3d.library.Asset3DLibrary;
+*/
 
 #if SScript
 import tea.SScript;
@@ -299,6 +322,27 @@ class PlayState extends MusicBeatState
 
 	public var sfxVolume:Float = 1;
 	public var musicVolume:Float = 1;
+	private var meta:SongMetaTags;
+
+	var view:ModelView;
+
+	var tv:TVModel;
+
+	var lowRes:Bool = false;
+
+	var mouseSpr:FlxSprite;
+
+	var circlSpr:FlxSprite;
+	var circlSpr2:FlxSprite;
+
+	var staticScreen:FlxSprite;
+	var scanlines:FlxSprite;
+	var barThing:FlxSprite;
+	var barTween:FlxTween;
+
+	var disableMouse:Bool = false;
+
+	var blackThing:FlxSprite;
 
 	override public function create()
 	{
@@ -410,28 +454,114 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			/*case 'test':
-				// cam3D will already be defined for you, so you can just put it there
-
+			case 'school':
 				cam3D = new Flx3DView(0, 0, 1600, 900); // make sure to keep width and height as 1600 and 900
 				cam3D.scrollFactor.set();
 				cam3D.screenCenter();
 				cam3D.antialiasing = true;
 				add(cam3D);
+			view = new ModelView(1, 0, 1, 1, 6000);
 
-				// when you add your model, choose the path that fits your model, like Paths.obj or Paths.md2
+			view.view.visible = false;
 
-				cam3D.addModel(Paths.obj("object"), function(event)
-				{
-					trace("STAGE:" + Std.string(event.asset.assetType));
-					if (Std.string(event.asset.assetType) == "mesh") {
-						var mesh:Mesh = cast(event.asset, Mesh);
-						mesh.scale(50);
-						mesh.rotationY = 90;
-						System.gc();
-					}
-				}, "assets/shared/models/tex.png", true);
-			// paths for the image do not really work, so we have to do something like "assets/shared/models/texture.png"*/
+			LoadingCount.expand(2);
+
+			view.distance = 370;
+			view.setCamLookAt(0, 90, 0);
+
+			Asset3DLibrary.enableParser(AWDParser);
+			Asset3DLibrary.addEventListener(Asset3DEvent.ASSET_COMPLETE, onAssetComplete);
+			Asset3DLibrary.load(new URLRequest("assets/models/school.awd"));
+			Asset3DLibrary.load(new URLRequest("assets/models/petal.awd"));
+
+			skyboxTex = new BitmapCubeTexture(Cast.bitmapData("assets/models/skybox/px.png"), Cast.bitmapData("assets/models/skybox/nx.png"),
+				Cast.bitmapData("assets/models/skybox/py.png"), Cast.bitmapData("assets/models/skybox/ny.png"),
+				Cast.bitmapData("assets/models/skybox/pz.png"), Cast.bitmapData("assets/models/skybox/nz.png"));
+
+			skybox = new SkyBox(skyboxTex);
+			view.view.scene.addChild(skybox);
+			if (Config.lowRes)
+			{
+				view.sprite.cameras = [camUnderHUD];
+				add(view.sprite);
+				var lowest = Math.min(FlxG.width / view.sprite.width, FlxG.height / view.sprite.height);
+				view.sprite.scale.set(lowest, lowest);
+				view.sprite.updateHitbox();
+				view.sprite.screenCenter(XY);
+				lowRes = true;
+				// camUnderHUD.setFilters([new BlurFilter(2, 2, BitmapFilterQuality.LOW), new ShaderFilter(new Scanlines())]);
+				view.sprite.shader = new PSXShader();
+				view.view.x = FlxG.stage.stageWidth;
+				view.view.y = FlxG.stage.stageHeight;
+			}
+			else
+			{
+				view.view.width = FlxG.scaleMode.gameSize.x;
+				view.view.height = FlxG.scaleMode.gameSize.y;
+				view.view.x = FlxG.stage.stageWidth / 2 - FlxG.scaleMode.gameSize.x / 2;
+				view.view.y = FlxG.stage.stageHeight / 2 - FlxG.scaleMode.gameSize.y / 2;
+			}
+		}
+		case 'tvStage':
+				cam3D = new Flx3DView(0, 0, 1600, 900); // make sure to keep width and height as 1600 and 900
+				cam3D.scrollFactor.set();
+				cam3D.screenCenter();
+				cam3D.antialiasing = true;
+				add(cam3D);
+			view = new ModelView(1, 1, 1, 1, 6000);
+
+			view.view.visible = false;
+
+			view.view.width = FlxG.scaleMode.gameSize.x;
+			view.view.height = FlxG.scaleMode.gameSize.y;
+			view.view.x = FlxG.stage.stageWidth / 2 - FlxG.scaleMode.gameSize.x / 2;
+			view.view.y = FlxG.stage.stageHeight / 2 - FlxG.scaleMode.gameSize.y / 2;
+
+			curStage = 'schoolEvil';
+
+			autoUi = false;
+
+			LoadingCount.expand(1);
+
+			view.distance = 1;
+			view.setCamLookAt(0, 90, 0);
+			view.view.camera.x = view.view.camera.y = view.view.camera.z = 0;
+			Asset3DLibrary.enableParser(AWDParser);
+			Asset3DLibrary.addEventListener(Asset3DEvent.ASSET_COMPLETE, onAssetCompleteTV);
+			Asset3DLibrary.load(new URLRequest("assets/models/floor/floor.awd"));
+			// Asset3DLibrary.load(new URLRequest("assets/models/petal.awd"));
+
+			planeBitmap = Cast.bitmapTexture("assets/models/floor/floor.png");
+			planeMat = new TextureMaterial(planeBitmap, false, true);
+			schoolPlane = new Mesh(new PlaneGeometry(5000, 5000), planeMat);
+			schoolPlane.scale(70);
+			schoolPlane.y -= 8000;
+
+			view.view.scene.addChild(schoolPlane);
+
+			skyboxTex = new BitmapCubeTexture(Cast.bitmapData("assets/models/skybox2/px.png"), Cast.bitmapData("assets/models/skybox2/nx.png"),
+				Cast.bitmapData("assets/models/skybox2/py.png"), Cast.bitmapData("assets/models/skybox2/ny.png"),
+				Cast.bitmapData("assets/models/skybox2/pz.png"), Cast.bitmapData("assets/models/skybox2/nz.png"));
+
+			skybox = new SkyBox(skyboxTex);
+			view.view.scene.addChild(skybox);
+
+			// tv = new ModelThing(view, 'tv', 'awd', [], [], 50, 0, 0, 0, -50, -20, 0, false, false);
+
+			camNotes.bgColor.alpha = 255;
+			// camNotes.setPosition(FlxG.width - 1, FlxG.height - 1);
+
+			// camNotes.setFilters([new ShaderFilter(new Scanlines())]);
+			@:privateAccess
+			if (true)
+			{
+				camNotes.flashSprite.cacheAsBitmap = true;
+			}
+
+			@:privateAccess
+			tv = new TVModel(planeBitmap.bitmapData.__texture, view, 'tv', 'awd', [], [], 50, 0, 0, 0, -50, 2000, 0, false, false, true);
+		}
+		// paths for the image do not really work, so we have to do something like "assets/shared/models/texture.png"*/
 
 			case 'stage': new states.stages.StageWeek1(); //Week 1
 			case 'spooky': new states.stages.Spooky(); //Week 2
