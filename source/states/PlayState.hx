@@ -95,8 +95,7 @@ import away3d.utils.Cast;
 import away3d.library.assets.Asset3DType;
 import openfl.net.URLRequest;
 import away3d.events.Asset3DEvent;
-import away3d.library.Asset3DLibrary;
-*/
+import away3d.library.Asset3DLibrary;*/
 
 #if SScript
 import tea.SScript;
