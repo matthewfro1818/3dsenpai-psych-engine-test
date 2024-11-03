@@ -1,0 +1,79 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-91,
+				-30
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Sing Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-102,
+				-71
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Sing Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-78,
+				-33
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Sing Right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-92,
+				-117
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Sing Down",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-100,
+				-60
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "Idle"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Whitty/Happywhitty",
+	"position": [
+		80,
+		90
+	],
+	"healthicon": "HappyWhitty",
+	"flip_x": false,
+	"healthbar_colors": [
+		75,
+		80,
+		115
+	],
+	"camera_position": [
+		180,
+		-10
+	],
+	"sing_duration": 6.1,
+	"scale": 0.9,
+	"_editor_isPlayer": false
+}

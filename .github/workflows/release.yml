@@ -1,0 +1,82 @@
+name: Release from Build
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/main.yml
+    # with:
+      # buildFlags: officialBuild
+
+  release-windows:
+    name: Release Windows Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Windows artifact
+      uses: actions/download-artifact@v3
+      with:
+        path: build
+        name: windowsBuild
+    - name: Compress build
+      run: |
+        sudo apt-get install p7zip-full
+        7z a -tzip build.zip -w ./build/.
+    - name: Upload Windows Build to Release
+      uses: svenstaro/upload-release-action@2.5.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+        file: build.zip
+        asset_name: FoxaWindows64.zip
+        overwrite: false
+
+  release-linux:
+    name: Release Linux Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Linux artifact
+      uses: actions/download-artifact@v3
+      with:
+        path: build
+        name: linuxBuild
+    - name: Compress build
+      run: |
+        sudo apt-get install p7zip-full
+        7z a -y -ttar build.tar -w ./build/.
+        gzip build.tar
+    - name: Upload Linux Build to Release
+      uses: svenstaro/upload-release-action@2.5.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+        file: build.tar.gz
+        asset_name: FoxaLinux64.tar.gz
+        overwrite: false
+
+  release-mac:
+    name: Release Mac Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Mac artifact
+      uses: actions/download-artifact@v3
+      with:
+        path: build
+        name: macBuild
+    - name: Compress build
+      run: |
+        sudo apt-get install p7zip-full
+        7z a -tzip build.zip -w ./build/.
+    - name: Upload Mac Build to Release
+      uses: svenstaro/upload-release-action@2.5.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+        file: build.zip
+        asset_name: FoxaMac64.zip
+        overwrite: false

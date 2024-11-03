@@ -1,0 +1,196 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk 2",
+			"text": "bidi beep.",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bfnew",
+			"sound": "bf"
+		},
+		{
+			"expression": "talk 1",
+			"text": "Ah...you again.",
+			"boxState": "normal",
+			"speed": 0.095,
+			"portrait": "foxa",
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk",
+			"text": "Beep. ",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bfnew",
+			"sound": "bf"
+		},
+		{
+			"expression": "talk 2",
+			"text": "What do you want?",
+			"boxState": "normal",
+			"speed": 0.07,
+			"portrait": "foxa",
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk 2",
+			"text": "beepo scap beeboop.",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bfnew",
+			"sound": "bf"
+		},
+		{
+			"expression": "talk 3",
+			"text": "I'm not so sure on what that means...",
+			"boxState": "normal",
+			"speed": 0.035,
+			"portrait": "foxa",
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk",
+			"text": "Don't you speak English or something??",
+			"boxState": "normal",
+			"portrait": "foxa",
+			"speed": 0.025,
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk",
+			"text": "bep.",
+			"boxState": "normal",
+			"portrait": "bfnew",
+			"speed": 0.05,
+			"sound": "bf"
+		},
+		{
+			"expression": "talk 1",
+			"text": "Yeah, so, We're looking for a bomb head by the name of Whitty.",
+			"boxState": "normal",
+			"sound": "gf",
+			"portrait": "gfnew",
+			"speed": 0.035
+		},
+		{
+			"expression": "talk 2",
+			"text": "Happen to know where he is by any chance?",
+			"boxState": "normal",
+			"sound": "gf",
+			"portrait": "GFnew",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk 2",
+			"text": "Why are you two looking for him?",
+			"boxState": "normal",
+			"portrait": "foxa",
+			"speed": 0.05,
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk 1",
+			"text": "Well, he is an EX-rockstar.",
+			"boxState": "normal",
+			"sound": "gf",
+			"portrait": "GFnew",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk 2",
+			"text": "and my boyfriend wants to sing against him.",
+			"boxState": "normal",
+			"sound": "gf",
+			"portrait": "GFnew",
+			"speed": 0.085
+		},
+		{
+			"expression": "talk 2",
+			"text": "Beep.",
+			"boxState": "normal",
+			"sound": "bf",
+			"portrait": "bfnew",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk 3",
+			"text": "yeah- I'm not so sure I want to tell you... ",
+			"boxState": "normal",
+			"portrait": "foxa",
+			"speed": 0.05,
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk miss 2",
+			"text": "bop beep?",
+			"boxState": "normal",
+			"portrait": "bfnew",
+			"speed": 0.05,
+			"sound": "bf"
+		},
+		{
+			"expression": "talk",
+			"text": "Look, that isn't any of your business.",
+			"boxState": "normal",
+			"portrait": "foxa",
+			"speed": 0.05,
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk 2",
+			"text": "And I don't wanna be caught seen out here...",
+			"boxState": "normal",
+			"portrait": "foxa",
+			"speed": 0.06,
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk 1",
+			"text": "So, would you please kindly leave?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "foxa",
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk 2",
+			"text": "Bop bee scoboo bep! ",
+			"boxState": "normal",
+			"portrait": "bfnew",
+			"speed": 0.05,
+			"sound": "bf"
+		},
+		{
+			"expression": "talk 2",
+			"text": "I'm sorry if that's rude of me to ask...",
+			"boxState": "normal",
+			"portrait": "foxa",
+			"speed": 0.09,
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk 6",
+			"text": "But you REALLY shouldn't be here...",
+			"boxState": "normal",
+			"portrait": "foxa",
+			"speed": 0.05,
+			"sound": "foxa"
+		},
+		{
+			"expression": "talk 3",
+			"text": "boop scop bopi boh!!",
+			"boxState": "normal",
+			"portrait": "bfnew",
+			"speed": 0.05,
+			"sound": "bf"
+		},
+		{
+			"expression": "talk 5",
+			"text": "...",
+			"boxState": "normal",
+			"portrait": "Foxa",
+			"speed": 0.29,
+			"sound": "foxa"
+		}
+	]
+}

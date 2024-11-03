@@ -1,0 +1,9 @@
+{
+	"name": "Name",
+	"description": "Description",
+	"restart":false,
+	"runsGlobally": true,
+	"color": [170, 0, 255],
+	"discordRPC": "1187152981037170768",
+	"iconFramerate": 10
+}
